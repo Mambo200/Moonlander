@@ -28,6 +28,8 @@ public class RocketControl : MonoBehaviour {
     private bool[] m_CalcCollision;                 // wenn auf true --> Collision muss berechnet werden
     private bool[] m_col;                           // bei dem Objekt, bei dem es kollidiert --> true. daraus wird "m_CollisionRocketGround" auf true gesetzt
 
+    private Sphere[] m_Meteorite;
+
     // Use this for initialization
     void Start ()
     {
@@ -42,6 +44,16 @@ public class RocketControl : MonoBehaviour {
 
         // Material Rot für wenn Kollidiert
         m_Material = GetComponent<Renderer>().material;
+
+        // get meteorites array
+        m_Meteorite = new Sphere[GetMeteorites.m_ChildrenObstacles.GetLength(0)];
+        for (int i = 0; i < GetMeteorites.m_ChildrenObstacles.GetLength(0); i++)
+        {
+            // set Center
+            m_Meteorite[i].m_Center = VectorUmwandeln(GetMeteorites.m_ChildrenObstacles[i].position);
+            // set Radius
+            m_Meteorite[i].m_Radius = GetMeteorites.m_ChildrenObstacles[i].lossyScale.x;
+        }
 
         m_Movement = 5f;
         m_MovementRotation = 0;
@@ -141,7 +153,7 @@ public class RocketControl : MonoBehaviour {
             else
                 m_CalcCollision[i] = false;
         }
-        // check collision of static objects
+        // check collision of ground, top, left and right block
         for (int i = 0; i < m_StaticObjects.GetLength(0); i++)
         {
             if (m_CalcCollision[i] == false)
@@ -153,6 +165,8 @@ public class RocketControl : MonoBehaviour {
             if (m_col[i])
                 m_CollisionRocketGround = true;
         }
+
+        // check collision of Meteorites
 
         // wenn nichts kollidiert -> CollisionRocketGround = false
         bool tempVarForNothing = false;
