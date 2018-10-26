@@ -64,6 +64,7 @@
     <Compile Include="Assets\Script\CubeEckPosition.cs" />
     <Compile Include="Assets\Script\GetMeteorites.cs" />
     <Compile Include="Assets\Script\MereoriteSpin.cs" />
+    <Compile Include="Assets\Script\ReloadScene.cs" />
     <Compile Include="Assets\Script\RocketControl.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>D:/Benutzerdaten/Uni/Dokumente/Github/Unity/Moonlander/Moonlander/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
